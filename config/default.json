@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://sj:sj@cluster0.uwiom.mongodb.net/Brad?retryWrites=true&w=majority",
+    "jwt_secret_key": "My_Secret_Key"
+}

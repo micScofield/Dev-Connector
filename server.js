@@ -11,6 +11,17 @@ const app = express()
 
 app.use(express.json()) //for bodyparsing 
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-token'
+    );
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+
+    next();
+});
+
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/profiles', require('./routes/api/profiles'))

@@ -1,0 +1,161 @@
+:root {
+  --primary-color: #17a2b8;
+  --dark-color: #343a40;
+  --light-color: #f4f4f4;
+  --danger-color: #dc3545;
+  --success-color: #28a745;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #fff;
+  color: #333;
+}
+
+.primary-color {
+  color: var(--primary-color)
+}
+
+img {
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* containers */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
+/* text-size classes */
+.x-large {
+  font-size: 4rem;
+}
+.large {
+  font-size: 2rem;
+}
+.medium {
+  font-size: 1.5rem;
+}
+
+/* buttons */
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  background-color: var(--light-color);
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+  color: #333;
+  outline: none;
+  transition: opacity 0.2s ease-in
+}
+
+.btn-disabled {
+  cursor: not-allowed;
+}
+
+.btn-large {
+  padding: 0.5rem 1rem;
+  font-size: large;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.alert {
+  padding: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.btn-primary,
+.alert-primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btn-light,
+.alert-light {
+  background: var(--light-color);
+  color: #333;
+}
+
+.alert-dark {
+  background: var(--danger-color);
+  color: #fff;
+}
+
+/* navbar */
+/* .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0.7rem 2rem;
+  border-bottom: 1px solid var(--primary-color);
+  opacity: 0.8;
+  background-color: var(--dark-color);
+}
+
+.navbar ul {
+  display: flex;
+}
+
+.navbar a {
+  margin: 0 0.25rem;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+.navbar a:hover {
+  color: var(--primary-color)
+} */
+
+/* landing */
+/* .landing {
+  position: relative;
+  background: url('./img/showcase.jpg') no-repeat center center/cover;
+  height: 100vh;
+}
+
+.landingInner {
+  color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.landingOverlay {
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+} */

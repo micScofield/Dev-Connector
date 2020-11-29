@@ -21,7 +21,8 @@ const Signup = async (req, res, next) => {
     try {
         user = await User.findOne({ email: email })
         if (user) {
-            return next(new HttpError('Email exists', 400))
+            //return next(new HttpError('Email exists', 400))
+            return res.status(400).json({msg: 'Email Exists'})
         }
     } catch (error) {
         return next(new HttpError('Error while looking up to the db', 500))

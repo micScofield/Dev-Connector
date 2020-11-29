@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const { validationResult } = require('express-validator')
 const request = require('request')
 const config = require('config')
@@ -6,7 +5,6 @@ const config = require('config')
 const HttpError = require('../models/http-error')
 const Profile = require('../models/Profile')
 const User = require('../models/User')
-const { response } = require('express')
 
 const myProfile = async (req, res, next) => {
 
@@ -190,7 +188,6 @@ const deleteExperience = async (req, res, next) => {
         await profile.save()
 
         res.json({ profile: profile })
-
     } catch (error) {
         return next(new HttpError('Error while removing experience', 500))
     }

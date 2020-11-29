@@ -24,6 +24,7 @@ module.exports = async (req, res, next) => {
         req.user = decodedToken.user
         next()
     } catch (error) {
-        return next(new HttpError('Token is not valid', 401))
+        //return next(new HttpError('Token is not valid', 401))
+        res.status(401).json({msg: 'Token is not valid. Please login again !'})
     }
 }

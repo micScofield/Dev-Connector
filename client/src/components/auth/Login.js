@@ -96,7 +96,7 @@ const Login = props => {
                     )
                 })
             }
-            <input type="submit" disabled={!isFormValid} className={loginButtonClasses.join(' ')} style={{border: 'none'}} value="login" /><br />
+            <input type="submit" disabled={!isFormValid} className={loginButtonClasses.join(' ')} value="login" /><br />
             Don't have an account ? <Link to='/register' className='btn btn-primary'>Sign up</Link>
         </form>
     )

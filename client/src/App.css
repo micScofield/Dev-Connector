@@ -42,13 +42,13 @@ a {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
+  margin-top: 5rem;
   margin-bottom: 3rem;
 }
 
 /* text-size classes */
 .x-large {
-  font-size: 4rem;
+  font-size: 3.7rem;
 }
 .large {
   font-size: 2rem;
@@ -67,7 +67,12 @@ a {
   margin-right: 1rem;
   color: #333;
   outline: none;
+  border: none;
   transition: opacity 0.2s ease-in
+}
+
+.btn:hover {
+  opacity: 0.8;
 }
 
 .btn-disabled {
@@ -77,10 +82,6 @@ a {
 .btn-large {
   padding: 0.5rem 1rem;
   font-size: large;
-}
-
-.btn:hover {
-  opacity: 0.8;
 }
 
 .alert {
@@ -100,7 +101,8 @@ a {
   color: #333;
 }
 
-.alert-dark {
+.alert-dark,
+.btn-dark {
   background: var(--danger-color);
   color: #fff;
 }

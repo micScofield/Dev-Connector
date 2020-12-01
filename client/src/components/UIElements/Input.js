@@ -3,27 +3,50 @@ import { Fragment } from 'react'
 import './Input.css'
 
 const Input = props => {
-    const { invalid, elementType, elementConfig, touched, changed, value } = props
+    const { invalid, elementType, elementConfig, touched, changed, value, info, icon } = props
 
     let cssClasses = ['input']
-    if (props.invalid && props.touched) {
+    if (invalid && touched) {
         cssClasses.push('invalid')
     }
 
     let inputElement
 
     if (elementType === 'input') {
-        inputElement = <input className={cssClasses.join(' ')} {...elementConfig} onChange={changed} value={value} />
-    } else if (elementType === 'input-email') {
         inputElement = (
             <Fragment>
-                <input className={cssClasses.join(' ')} {...elementConfig} onChange={changed} value={value} /><br />
-                <small>This site uses gravatar, so if you want to have a profile image, use that one.</small>
+                {icon === 'null' ? null : icon}
+                <input className={cssClasses.join(' ')} {...elementConfig} onChange={changed} value={value} />
+                <small>{info}</small>
+            </Fragment>
+        )
+    } else if (elementType === 'textarea') {
+        inputElement = (
+            <Fragment>
+                <textarea className={cssClasses.join(' ')} {...elementConfig} onChange={changed} value={value} />
+                <small>{info}</small>
+            </Fragment>
+        )
+    } else if (elementType === 'select') {
+        inputElement = (
+            <Fragment>
+                <select className={cssClasses.join(' ')} onChange={changed}>
+                    {elementConfig.options.map(option => {
+                        return (
+                            <option key={option.value} value={option.value} >{option.displayValue}</option>
+                        )
+                    })}
+                </select>
+                <small>{info}</small>
             </Fragment>
         )
     }
 
-    return <div className='form-group'>{inputElement}</div>
+    const mainDivCss = ['form-group']
+    if (icon) {
+        mainDivCss.push('social-input')
+    }
+    return <div className={mainDivCss.join(' ')}>{inputElement}</div>
 }
 
 export default Input

@@ -21,10 +21,11 @@ const Register = props => {
                 required: true
             },
             valid: false,
-            touched: false
+            touched: false,
+            info: ''
         },
         email: {
-            elementType: 'input-email',
+            elementType: 'input',
             elementConfig: {
                 type: 'text',
                 placeholder: 'Email Address'
@@ -35,7 +36,8 @@ const Register = props => {
                 isEmail: true
             },
             valid: false,
-            touched: false
+            touched: false,
+            info: 'This site uses gravatar, so if you want to have a profile image, use that one.'
         },
         password: {
             elementType: 'input',
@@ -49,7 +51,8 @@ const Register = props => {
                 minLength: 5
             },
             valid: false,
-            touched: false
+            touched: false,
+            info: ''
         },
         password2: {
             elementType: 'input',
@@ -63,7 +66,8 @@ const Register = props => {
                 minLength: 5
             },
             valid: false,
-            touched: false
+            touched: false,
+            info: ''
         }
     })
 
@@ -122,6 +126,7 @@ const Register = props => {
                             elementType={i.config.elementType}
                             elementConfig={i.config.elementConfig}
                             changed={onChangeHandler.bind(this, i.id, i.config.validation)}
+                            info={i.config.info}
                             value={i.config.value} />
                     )
                 })

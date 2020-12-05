@@ -9,8 +9,9 @@ import Dashboard from './components/dashboard/Dashboard'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Logout from './components/auth/Logout'
-import Profile from './components/dashboard/profiles/Profile'
+//import Profile from './components/dashboard/profiles/Profile'
 import CreateProfile from './components/dashboard/profiles/CreateProfile'
+import EditProfile from './components/dashboard/profiles/EditProfile'
 import { loadUser } from './store/actions'
 import './App.css';
 
@@ -26,8 +27,9 @@ const App = props => {
       <Route path='/login' exact component={Login} />
       <PrivateRoute path='/logout' exact component={Logout} />
       <PrivateRoute path='/dashboard' exact component={Dashboard} />
-      <Route path='/profiles' exact component={Profile} />
-      <Route path='/create-profile' exact component={CreateProfile} />
+      {/* <Route path='/profiles' exact component={Profile} /> */}
+      <PrivateRoute path='/create-profile' exact component={CreateProfile} />
+      <PrivateRoute path='/edit-profile' exact component={EditProfile} />
       <Route path='/' exact component={Lander} />
       <Redirect to='/' />
     </Switch>

@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
 
 import './Lander.css'
 
-const Lander = () => {
+const Lander = props => {
+
+    if (props.isAuth) {return <Redirect to='/dashboard' />}
+
     return <section className='landing'>
         <div className='landingOverlay'>
             <div className='landingInner'>
@@ -17,4 +21,10 @@ const Lander = () => {
     </section>
 }
 
-export default Lander
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+export default connect(mapStateToProps)(Lander)

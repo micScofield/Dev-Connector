@@ -18,8 +18,8 @@ const Navbar = props => {
         navLinks = (
             <ul>
                 <li><Link to="/profiles">Developers</Link></li>
-                <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><Link to="/logout">Logout</Link></li>
+                <li><Link to="/dashboard"><i className="fas fa-user"></i> Dashboard</Link></li>
+                <li><Link to="/logout"><i className="fas fa-sign-out-alt"></i> Logout</Link></li>
             </ul>
         )
     }

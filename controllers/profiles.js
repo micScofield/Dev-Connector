@@ -15,7 +15,8 @@ const myProfile = async (req, res, next) => {
         return next(new HttpError('Error while looking for profile', 500))
     }
     if (!profile) {
-        return next(new HttpError('No profile found for this user', 404))
+        return res.status(404).json({ msg: 'No profile found for this user' })
+        //return next(new HttpError('No profile found for this user', 404))
     }
 
     if (profile) {

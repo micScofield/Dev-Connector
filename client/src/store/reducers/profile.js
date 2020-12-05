@@ -6,8 +6,14 @@ const initialState = {
     loading: false
 }
 
-const reducer = (state=initialState, action) => {
-    switch(action.type) {
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case actiontypes.FETCH_PROFILE_START:
+            return { ...state, loading: true }
+        case actiontypes.LOAD_CURRENT_PROFILE_SUCCESS:
+            return { ...state, loading: false, profile: action.profile }
+        case actiontypes.PROFILE_ERROR:
+            return { ...state, loading: false }
         default:
             return state
     }

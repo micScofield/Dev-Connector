@@ -49,6 +49,11 @@ const CreateProfile = props => {
         formArray.push(formData[key])
     }
 
+    let CreateProfileButtonClasses = ['btn', 'btn-large', 'btn-primary']
+    if (!isFormValid) {
+        CreateProfileButtonClasses.push('btn-disabled')
+    }
+
     return <Fragment>
         <div className='container'>
             <h1 className='large primary-color'>Create Your Profile</h1>
@@ -73,7 +78,7 @@ const CreateProfile = props => {
                     })}
                 </div>
                 <div>
-                    <input type='submit' disabled={!isFormValid} className='btn btn-large btn-primary' />
+                    <input type='submit' disabled={!isFormValid} className={CreateProfileButtonClasses.join(' ')} />
                     <Link to='/profiles' className='btn btn-dark'> Go Back </Link>
                 </div>
             </form>

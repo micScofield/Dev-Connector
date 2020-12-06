@@ -11,15 +11,15 @@ const authFailure = () => { return { type: actionTypes.AUTH_FAILURE } }
 
 //for setting auth token with request
 const authInvalidToken = () => { return { type: actionTypes.AUTH_INVALID_TOKEN } }
-const loadUserSuccess = (user) => { 
-    return { 
+const loadUserSuccess = (user) => {
+    return {
         type: actionTypes.LOAD_USER_SUCCESS,
         user: user
-    } 
+    }
 }
 
 //logout
-const authLogout = () => {return {type: actionTypes.LOGOUT}}
+const authLogout = () => { return { type: actionTypes.LOGOUT } }
 
 export const auth = (name, email, password) => async dispatch => {
     dispatch(authStart())
@@ -71,7 +71,7 @@ export const loadUser = () => async dispatch => {
         dispatch(loadUserSuccess(res.data.user))
     } catch (error) {
         dispatch(authInvalidToken())
-        console.log(error.response.data.msg) //show a modal to user with this error and provide a login button
+        if (error.response) console.log(error.response.data.msg) //show a modal to user with this error and provide a login button
     }
 }
 

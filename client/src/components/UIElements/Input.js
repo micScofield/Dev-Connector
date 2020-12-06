@@ -31,6 +31,7 @@ const Input = props => {
         inputElement = (
             <Fragment>
                 <select className={cssClasses.join(' ')} onChange={changed}>
+                    <option value='' >{elementConfig.option1}</option>
                     {elementConfig.options.map(option => {
                         return (
                             <option key={option.value} value={option.value} >{option.displayValue}</option>

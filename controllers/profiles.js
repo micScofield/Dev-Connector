@@ -31,7 +31,7 @@ const setProfile = async (req, res, next) => {
         return res.status(422).json({ errors: errors.array() })
     }
 
-    const {
+    let {
         company,
         website,
         location,
@@ -55,6 +55,7 @@ const setProfile = async (req, res, next) => {
     if (bio) profileFields.bio = bio
     if (status) profileFields.status = status
     if (githubUsername) profileFields.githubUsername = githubUsername
+
     profileFields.skills = skills.split(',').map(skill => skill.trim())
 
     //set social object
@@ -76,7 +77,7 @@ const setProfile = async (req, res, next) => {
                 { new: true }
             )
 
-            res.json({ profile: profile })
+            return res.json({ profile: profile })
         }
 
         //create
@@ -86,6 +87,7 @@ const setProfile = async (req, res, next) => {
         return res.json({ profile: profile })
 
     } catch (error) {
+        console.log('here')
         return next(new HttpError('Error while setting up profile'), 500)
     }
 }

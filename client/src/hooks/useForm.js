@@ -12,6 +12,7 @@ const useForm = props => {
         let placeholder = ''
         let elementType = 'input'
         let options = []
+        let option1 = '' //for placeholder in dropdown
         let icon = null
 
         if (props[key].name === 'name') { placeholder = 'Name' }
@@ -30,7 +31,8 @@ const useForm = props => {
 
         if (props[key].name === 'status') {
             elementType = 'select'
-            placeholder = '* Select Professional Status'
+            option1 = props[key].options[0]
+            props[key].options.shift()
             props[key].options.map(option => options.push({ value: option.toLowerCase().trim().split(' ').join(''), displayValue: option }))
         }
 
@@ -75,6 +77,7 @@ const useForm = props => {
             elementConfig: {
                 type: type,
                 placeholder: placeholder,
+                option1: option1 ? option1 : null ,
                 options
             },
             value: '',

@@ -8,7 +8,7 @@ import { setAlert } from './alert'
 
 const fetchProfileStart = () => { return { type: actionTypes.FETCH_PROFILE_START } }
 const loadCurrentProfileSuccess = (profile) => { return { type: actionTypes.LOAD_CURRENT_PROFILE_SUCCESS, profile: profile } }
-const profileError = () => {return {type: actionTypes.PROFILE_ERROR}}
+const profileError = () => { return { type: actionTypes.PROFILE_ERROR } }
 
 export const currentProfile = () => async dispatch => {
     dispatch(fetchProfileStart())
@@ -38,17 +38,21 @@ export const createProfile = (formData, history, edit = false) => async dispatch
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        console.log('here')
+        console.log('sending data', formData)
         let res = await axios.post('http://localhost:5000/api/profiles', JSON.stringify(formData), config)
-        console.log(res)
+
+        if (res.status === 200) dispatch(setAlert('success', edit ? 'Profile updated successfully !' : 'Profile created successfully !'))
+
         dispatch(loadCurrentProfileSuccess(res.data.profile))
-        if(response.status === 200) dispatch(setAlert('success', edit ? 'Profile updated successfully !' : 'Profile created successfully !')) 
         history.push('/dashboard')
     } catch (error) {
         dispatch(profileError())
-        error.response.data.errors.forEach(error => {
-            dispatch(setAlert('danger', error.msg))
-        });
+        if (error.response) {
+            error.response.data.errors.forEach(error => {
+                dispatch(setAlert('danger', error.msg))
+            });
+        }
+        console.log('some unknown error occurred !')
     }
 }
 

@@ -41,7 +41,7 @@ const login = async (req, res, next) => {
                 jwt.sign(
                     payload,
                     config.get('jwt_secret_key'),
-                    { expiresIn: '1h' },
+                    { expiresIn: '10h' },
                     (error, token) => {
                         if (error) {
                             return next(new HttpError('Couldnt create the token', 500))

@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { setAlert, login } from '../../store/actions'
+import { login } from '../../store/actions'
 import Spinner from '../UIElements/Spinner'
 import CheckValidity from '../../utility/checkValidity'
 import Input from '../UIElements/Input'

@@ -36,7 +36,7 @@ const useForm = props => {
             props[key].options.map(option => options.push({ value: option.toLowerCase().trim().split(' ').join(''), displayValue: option }))
         }
 
-        if (props[key].name === 'company') { placeholder = 'Company' }
+        if (props[key].name === 'company') { placeholder = props[key].validation ? '* Company' : 'Company' }
 
         if (props[key].name === 'website') { placeholder = 'Website' }
 
@@ -51,25 +51,41 @@ const useForm = props => {
             placeholder = 'A short bio of yourself'
         }
 
-        if (props[key].name === 'twitter') { 
+        if (props[key].name === 'jobdescription') {
+            elementType = 'textarea'
+            placeholder = 'Job Description'
+        }
+
+        if (props[key].name === 'jobtitle') { placeholder = '* Job Title' }
+
+        if (props[key].name === 'fromdate' || props[key].name === 'todate') {
+            type = 'date'
+        }
+
+        if (props[key].name === 'currentjob') {
+            type = 'checkbox'
+            placeholder = 'Current Job'
+        }
+
+        if (props[key].name === 'twitter') {
             icon = <i className="fab fa-twitter fa-2x"></i>
-            placeholder = 'Twitter URL' 
+            placeholder = 'Twitter URL'
         }
         if (props[key].name === 'facebook') {
-            icon = <i className="fab fa-facebook fa-2x"></i> 
-            placeholder = 'Facebook URL' 
+            icon = <i className="fab fa-facebook fa-2x"></i>
+            placeholder = 'Facebook URL'
         }
         if (props[key].name === 'youtube') {
-            icon = <i className="fab fa-youtube fa-2x"></i> 
-            placeholder = 'Youtube URL' 
+            icon = <i className="fab fa-youtube fa-2x"></i>
+            placeholder = 'Youtube URL'
         }
         if (props[key].name === 'linkedIn') {
-            icon = <i className="fab fa-linkedin fa-2x"></i> 
-            placeholder = 'LinkedIn URL' 
+            icon = <i className="fab fa-linkedin fa-2x"></i>
+            placeholder = 'LinkedIn URL'
         }
         if (props[key].name === 'instagram') {
-            icon = <i className="fab fa-instagram fa-2x"></i> 
-            placeholder = 'Instagram URL' 
+            icon = <i className="fab fa-instagram fa-2x"></i>
+            placeholder = 'Instagram URL'
         }
 
         const field = {
@@ -77,9 +93,10 @@ const useForm = props => {
             elementConfig: {
                 type: type,
                 placeholder: placeholder,
-                option1: option1 ? option1 : null ,
+                option1: option1 ? option1 : null,
                 options
             },
+            checked: props[key].checkbox === true ? true : false,
             value: '',
             validation: props[key].validation ? props[key].validation : '',
             valid: props[key].validation ? false : true,
@@ -113,6 +130,9 @@ const useForm = props => {
         updatedFormData.config.value = event.target.value
         updatedFormData.config.valid = checkValidity(event.target.value, rules)
         updatedFormData.config.touched = true
+
+        //setting values differently for checkboxes- using the checked field
+        if (identifier === 'currentjob') updatedFormData.config.checked = !updatedFormData.config.checked
 
         copiedForm[index] = updatedFormData
 

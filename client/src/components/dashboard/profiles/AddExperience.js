@@ -4,33 +4,24 @@ import { connect } from 'react-redux'
 
 import useForm from '../../../hooks/useForm'
 import Input from '../../UIElements/Input'
-import { createProfile } from '../../../store/actions'
+//import { AddExperience } from '../../../store/actions'
 
-const CreateProfile = props => {
+const AddExperience = props => {
 
-    //param1 = name, param2 = validation, param3= info/subscript, param4 = options  | returns form, overall validity, onChangeHandler
+    //param1 = name, param2 = validation rules, param3= info/subscript, param4 = options | returns form, overall validity, onChangeHandler
     //for dropdown inputs please provide options also
-    const statusOptions = ['* Select Professional Status', 'Developer', 'Junior Developer', 'Senior Developer', 'Manager', 'Student or Learning', 'Instructor', 'Intern', 'Other']
 
     const [formData, isFormValid, onChangeHandler] = useForm([
-        { name: 'status', validation: { required: true }, info: 'Give us an idea of where you are at in your career', options: statusOptions },
-        { name: 'company', info: 'Could be your own company or one you work for' },
-        { name: 'website', info: 'Could be your own or a company website' },
-        { name: 'location', info: 'City & state suggested (eg. Boston, MA)' },
-        { name: 'skills', validation: { required: true }, info: 'Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)' },
-        { name: 'githubusername', info: 'If you want your latest repos and a Github link, include your username' },
-        { name: 'bio', info: 'Tell us a little about yourself' },
-        { name: 'twitter' },
-        { name: 'facebook' },
-        { name: 'youtube' },
-        { name: 'linkedIn' },
-        { name: 'instagram' }
+        { name: 'jobtitle', validation: { required: true } },
+        { name: 'company', validation: { required: true } },
+        { name: 'location' },
+        { name: 'fromdate', info: 'From Date' },
+        { name: 'currentjob', checkbox: false },
+        { name: 'todate', info: 'To Date' },
+        { name: 'jobdescription' }
     ])
 
-    //cant do optional stuff inside hook because we are not managing the field via state. 
-    //we have custom dynamic JS object field for each input field, manage state here itself for optional cases.
-
-    const createProfileHandler = () => {
+    const AddExperienceHandler = () => {
         event.preventDefault();
 
         //converting formData to the form we expect at the backend {status: '', company: '', ...}
@@ -40,7 +31,7 @@ const CreateProfile = props => {
             userFormData[name] = formData[userInputIdentifier].config.value
         }
         console.log(userFormData)
-        props.createProfile(userFormData, props.history)
+        //props.AddExperience(userFormData, props.history)
     }
 
     //converting object format to an array to loop through and map each one to an input field
@@ -49,18 +40,28 @@ const CreateProfile = props => {
         formArray.push(formData[key])
     }
 
-    let CreateProfileButtonClasses = ['btn', 'btn-large', 'btn-primary']
+    //popping the todate field if currentjob is checked...(took 3 hours. Was earlier trying to disable the field but couldnt, instead popping it is elegant and easier)
+    for (let key in formData) {
+        if (formData[key].id === 'currentjob') {
+            if (formData[key].config.checked) {
+                const index = formArray.findIndex(element => element.id === 'todate')
+                formArray.splice(index, 1)
+            }
+        }
+    }
+
+    let AddExperienceButtonClasses = ['btn', 'btn-large', 'btn-primary']
     if (!isFormValid) {
-        CreateProfileButtonClasses.push('btn-disabled')
+        AddExperienceButtonClasses.push('btn-disabled')
     }
 
     return <Fragment>
         <div className='container'>
-            <h1 className='large primary-color'>Create Your Profile</h1>
-            <p className='medium'><i className='fas fa-user'></i> Let's get some information to make your profile stand out</p>
+            <h1 className='large primary-color'>Add an Experience</h1>
+            <p className='medium'><i className='fas fa-code-branch'></i> Add any developer/programming positions that you have had in the past</p>
             <div style={{ marginTop: '10px' }}>* = required fields</div>
 
-            <form onSubmit={createProfileHandler}>
+            <form onSubmit={AddExperienceHandler}>
                 <div>
                     {formArray.map(i => {
                         return <Input
@@ -73,12 +74,13 @@ const CreateProfile = props => {
                             value={i.config.value}
                             info={i.config.info}
                             icon={i.config.icon}
+                            checked={i.config.checked}
                         />
                     })}
                 </div>
                 {props.alertMsg ? <p className='alert alert-dark'>{props.alertMsg}</p> : null}
                 <div>
-                    <input type='submit' disabled={!isFormValid} className={CreateProfileButtonClasses.join(' ')} />
+                    <input type='submit' disabled={!isFormValid} className={AddExperienceButtonClasses.join(' ')} />
                     <Link to='/profiles' className='btn btn-dark'> Go Back </Link>
                 </div>
             </form>
@@ -92,4 +94,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile))
+export default connect(mapStateToProps)(withRouter(AddExperience))

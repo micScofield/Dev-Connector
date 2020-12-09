@@ -12,7 +12,7 @@ const myProfile = async (req, res, next) => {
     try {
         profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar'])
     } catch (error) {
-        return next(new HttpError('Error while looking for profile', 500))
+        return next(new HttpError('Server Error', 500))
     }
     if (!profile) {
         return res.status(404).json({ msg: 'No profile found for this user' })
@@ -27,9 +27,12 @@ const myProfile = async (req, res, next) => {
 const setProfile = async (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
+        console.log(errors)
         // return next(new HttpError('Invalid Data passed', 422))
         return res.status(422).json({ errors: errors.array() })
     }
+
+    //if (typeof(req.body.skills) !== 'string') JSON.stringify(req.body.skills)
 
     let {
         company,
@@ -55,6 +58,10 @@ const setProfile = async (req, res, next) => {
     if (bio) profileFields.bio = bio
     if (status) profileFields.status = status
     if (githubUsername) profileFields.githubUsername = githubUsername
+
+    console.log(typeof (company))
+    console.log(typeof (skills))
+    console.log(typeof (twitter))
 
     profileFields.skills = skills.split(',').map(skill => skill.trim())
 

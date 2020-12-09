@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 import useForm from '../../../hooks/useForm'
 import Input from '../../UIElements/Input'
 import { createProfile, currentProfile } from '../../../store/actions'
+import Spinner from '../../UIElements/Spinner'
 
-const EditProfile = ({ history, loading, createProfile, profile }) => {
+const EditProfile = ({ history, loading, createProfile, profile, alertMsg, currentProfile }) => {
 
     //param1 = name, param2 = validation, param3= info/subscript  | returns form, overall validity, onChangeHandler
-    //for dropdown inputs please provide options also
+    //for dropdown inputs please provide options also (first one being placeholder)
     const statusOptions = ['* Select Professional Status', 'Developer', 'Junior Developer', 'Senior Developer', 'Manager', 'Student or Learning', 'Instructor', 'Intern', 'Other']
 
     const [formData, isFormValid, onChangeHandler] = useForm([
@@ -30,25 +31,24 @@ const EditProfile = ({ history, loading, createProfile, profile }) => {
     //cant do optional stuff inside hook because we are not managing the field via state. 
     //we have custom dynamic JS object field for each input field, manage state here itself for optional cases.
 
-    //fill existing profile data using useEffect
+    //filling existing profile data. (Like componentDidMount) if we write without useEffect, the existing values
+    //wont be change-able since we are always setting them up from db on each render cycle. To do it once, useEffect is key.
     useEffect(() => {
         currentProfile()
-        console.log('from hook', formData)
-        for (let key in formData) {
-            if (profile) {
+        if (!loading && profile) {
+            for (let key in formData) {
                 for (let profileItem in profile) {
-                    if (formData[key].id === profileItem) {
-                        console.log(profile[profileItem])
-                        console.log(formData[key].id)
-                        formData[key].config.value = profile[profileItem]
-                    }
+                    if (formData[key].id === profileItem) formData[key].config.value = profile[profileItem]
+                    if (formData[key].id === 'skills' && profileItem === 'skills') formData[key].config.value = profile[profileItem].join(', ')
+                }
+                for (let profileItem in profile.social) {
+                    if (profileItem === formData[key].id) formData[key].config.value = profile.social[profileItem]
                 }
             }
         }
-    }, [profile])
+    }, [])
 
-
-    const createProfileHandler = () => {
+    const editProfileHandler = () => {
         event.preventDefault();
 
         //converting formData to the form we expect at the backend {status: '', company: '', ...}
@@ -63,27 +63,22 @@ const EditProfile = ({ history, loading, createProfile, profile }) => {
     //converting object format to an array to loop through and map each one to an input field
     const formArray = []
     for (let key in formData) {
-        // if (profile) {
-        //     for (let profileItem in profile) {
-        //         if (formData[key].id === profileItem) {
-        //             formData[key].config.value = profile[profileItem]
-        //         }
-        //     }
-        // }
         formArray.push(formData[key])
     }
 
-    let editProfileButtonClasses = ['btn', 'btn-large', 'btn-primary']
-    if (!isFormValid) {
-        editProfileButtonClasses.push('btn-disabled')
-    }
+    loading && <Spinner />
+
+    // let editProfileButtonClasses = ['btn', 'btn-large', 'btn-primary']
+    // if (!isFormValid) {
+    //     editProfileButtonClasses.push('btn-disabled')
+    // }
 
     return <Fragment>
         <div className='container'>
             <h1 className='large primary-color'>Edit Your Profile</h1>
             <div style={{ marginTop: '10px' }}>* = required fields</div>
 
-            <form onSubmit={createProfileHandler}>
+            <form onSubmit={editProfileHandler}>
                 <div>
                     {formArray.map(i => {
                         return <Input
@@ -99,8 +94,9 @@ const EditProfile = ({ history, loading, createProfile, profile }) => {
                         />
                     })}
                 </div>
+                {alertMsg ? <p className='alert alert-dark'>{alertMsg}</p> : null}
                 <div>
-                    <input type='submit' disabled={!isFormValid} className={editProfileButtonClasses.join(' ')} />
+                    <input type='submit' className='btn btn-large btn-primary' />
                     <Link to='/profiles' className='btn btn-dark'> Go Back </Link>
                 </div>
             </form>
@@ -111,8 +107,9 @@ const EditProfile = ({ history, loading, createProfile, profile }) => {
 const mapStateToProps = state => {
     return {
         loading: state.profile.loading,
-        profile: state.profile.profile
+        profile: state.profile.profile,
+        alertMsg: state.alert.msg
     }
 }
 
-export default connect(mapStateToProps, { createProfile })(withRouter(EditProfile))
+export default connect(mapStateToProps, { createProfile, currentProfile })(withRouter(EditProfile))

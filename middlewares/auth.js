@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
 
     //check whether token present or not
     if (!token) {
-        return next(new HttpError('Not authorized', 401))
+        return res.status(401).json({msg: 'Token is not present. Please login again !'})
     }
 
     let decodedToken
@@ -25,6 +25,6 @@ module.exports = async (req, res, next) => {
         next()
     } catch (error) {
         //return next(new HttpError('Token is not valid', 401))
-        res.status(401).json({msg: 'Token is not valid. Please login again !'})
+        return res.status(401).json({msg: 'Token is not valid. Please login again !'})
     }
 }

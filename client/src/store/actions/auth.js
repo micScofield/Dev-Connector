@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 import * as actionTypes from './types'
-import { setAlert } from './index'
+import { setAlert, clearProfile } from './index'
 import { setAuthToken } from '../../utility/setAuthToken'
+
 
 //for login/signup
 const authStart = () => { return { type: actionTypes.AUTH_START } }
@@ -77,5 +78,6 @@ export const loadUser = () => async dispatch => {
 
 export const logout = () => async dispatch => {
     localStorage.removeItem('token')
-    return dispatch(authLogout())
+    dispatch(clearProfile())
+    dispatch(authLogout())
 }

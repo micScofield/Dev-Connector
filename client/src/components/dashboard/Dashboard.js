@@ -19,16 +19,24 @@ const Dashboard = props => {
     <div className='container'>
       <h1 className='primary-color'>Dashboard</h1>
       <p className='medium'><i className='fas fa-user'></i> Welcome {props.user && props.user.name}</p>
-      {!props.profile && <Fragment>
+      {!props.loading && !props.profile && <Fragment>
         <h3>No profile found for your user. Create one ?</h3> <Link className='btn btn-primary' to='/create-profile'>Create Profile</Link>
       </Fragment>
       }
 
       {props.alertMsg ? <p className={alertClasses.join(' ')}>{props.alertMsg}</p> : null}
 
-      {props.profile && <div>
-        <Link to='/edit-profile' className='btn btn-light'>Edit Profile</Link>
-      </div>}
+      {!props.loading && props.profile && <Fragment>
+        <Link to='/edit-profile' className='btn btn-light'>
+          <i className='fas fa-user-circle text-primary' /> Edit Profile
+        </Link>
+        <Link to='/add-experience' className='btn btn-light'>
+          <i className='fab fa-black-tie text-primary' /> Add Experience
+        </Link>
+        <Link to='/add-education' className='btn btn-light'>
+          <i className='fas fa-graduation-cap text-primary' /> Add Education
+      </Link>
+      </Fragment>}
     </div>
   )
   if (props.loading) dashboard = <Spinner />

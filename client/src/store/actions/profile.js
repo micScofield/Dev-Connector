@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
 
 import * as actionTypes from './types'
 import { setAuthToken } from '../../utility/setAuthToken'
@@ -21,13 +20,14 @@ export const currentProfile = () => async dispatch => {
     } catch (error) {
         console.log(error)
         dispatch(profileError())
-        dispatch(setAlert('danger', error.response.data.msg))
+        if (error.response.data.msg) dispatch(setAlert('danger', error.response.data.msg))
     }
 }
 
 export const createProfile = (formData, history, edit = false) => async dispatch => {
     dispatch(fetchProfileStart())
 
+    console.log(typeof (formData))
     console.log(formData)
 
     const config = {
@@ -47,6 +47,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
         history.push('/dashboard')
     } catch (error) {
         dispatch(profileError())
+        console.log(error.response.data.errors)
         if (error.response) {
             error.response.data.errors.forEach(error => {
                 dispatch(setAlert('danger', error.msg))
@@ -56,7 +57,4 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     }
 }
 
-
-
-
-
+export const clearProfile = () => { return { type: actionTypes.CLEAR_PROFILE } }

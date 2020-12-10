@@ -49,13 +49,16 @@ const login = async (req, res, next) => {
                         res.json({ token: token })
                     })
             } else {
-                return next(new HttpError('Incorrect password. Please try again', 401))
+                //return next(new HttpError('Incorrect password. Please try again', 401))
+                return res.status(401).json({msg: 'Incorrect password. Please try again'})
             }
         } else {
-            return next(new HttpError('No user with provided email exists.', 400))
+            //return next(new HttpError('No user with provided email exists.', 400))
+            return res.status(400).json({msg: 'No user with provided email exists.'})
         }
     } catch (error) {
-        return next(new HttpError('Server Error', 500))
+        //return next(new HttpError('Server Error', 500))
+        return res.status(500).json({msg: 'Server Error. Please try again'})
     }
 }
 

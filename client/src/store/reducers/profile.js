@@ -12,8 +12,10 @@ const reducer = (state = initialState, action) => {
             return { ...state, loading: true }
         case actiontypes.LOAD_CURRENT_PROFILE_SUCCESS:
             return { ...state, loading: false, profile: action.profile }
-        case actiontypes.CLEAR_PROFILE: 
-            return {...state, profile: null}
+        case actiontypes.LOAD_ALL_PROFILES_SUCCESS:
+            return { ...state, loading: false, profiles: action.profiles }
+        case actiontypes.CLEAR_PROFILE:
+            return { ...state, profile: null }
         case actiontypes.PROFILE_ERROR:
             return { ...state, loading: false }
         default:

@@ -8,8 +8,8 @@ import Lander from './components/layout/Lander'
 import Dashboard from './components/dashboard/Dashboard'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
+import Developers from './components/Developers'
 import Logout from './components/auth/Logout'
-//import Profile from './components/dashboard/profiles/Profile'
 import CreateProfile from './components/dashboard/profiles/CreateProfile'
 import EditProfile from './components/dashboard/profiles/EditProfile'
 import AddExperience from './components/dashboard/profiles/AddExperience'
@@ -27,9 +27,9 @@ const App = props => {
     <Switch>
       <Route path='/register' exact component={Register} />
       <Route path='/login' exact component={Login} />
+      <Route path='/developers' exact component={Developers} />
       <PrivateRoute path='/logout' exact component={Logout} />
       <PrivateRoute path='/dashboard' exact component={Dashboard} />
-      {/* <Route path='/profiles' exact component={Profile} /> */}
       <PrivateRoute path='/create-profile' exact component={CreateProfile} />
       <PrivateRoute path='/edit-profile' exact component={EditProfile} />
       <PrivateRoute path='/add-experience' exact component={AddExperience} />

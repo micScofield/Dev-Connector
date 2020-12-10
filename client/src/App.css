@@ -107,6 +107,28 @@ a {
   color: #fff;
 }
 
+/* tables */
+.table th,
+.table td {
+  padding: 1rem;
+  text-align: left;
+}
+
+.table th {
+  background: var(--light-color);
+}
+
+/* Mobile Styles */
+@media (max-width: 700px) {
+  .hide-sm {
+    display: none;
+  }
+
+  .container {
+    margin-top: 8rem;
+  }
+}
+
 /* navbar */
 /* .navbar {
   display: flex;

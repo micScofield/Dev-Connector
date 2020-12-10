@@ -20,7 +20,7 @@ const loadUserSuccess = (user) => {
 }
 
 //logout
-const authLogout = () => { return { type: actionTypes.LOGOUT } }
+export const authLogout = () => { return { type: actionTypes.LOGOUT } }
 
 export const auth = (name, email, password) => async dispatch => {
     dispatch(authStart())
@@ -61,6 +61,7 @@ export const login = (email, password) => async dispatch => {
         dispatch(loadUser())
     } catch (error) {
         dispatch(authFailure())
+        console.log(error.response.data.msg)
         dispatch(setAlert('danger', error.response.data.msg))
     }
 }

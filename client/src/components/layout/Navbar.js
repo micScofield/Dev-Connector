@@ -8,7 +8,7 @@ const Navbar = props => {
 
     let navLinks = (
         <ul>
-            <li><Link to="/profiles">Developers</Link></li>
+            <li><Link to="/developers">Developers</Link></li>
             <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
         </ul>
@@ -17,9 +17,9 @@ const Navbar = props => {
     if (props.isAuth) {
         navLinks = (
             <ul>
-                <li><Link to="/profiles">Developers</Link></li>
-                <li><Link to="/dashboard"><i className="fas fa-user"></i> Dashboard</Link></li>
-                <li><Link to="/logout"><i className="fas fa-sign-out-alt"></i> Logout</Link></li>
+                <li><Link to="/developers">Developers</Link></li>
+                <li><Link to="/dashboard"><i className="fas fa-user"></i>{' '}<span className="hide-sm">Dashboard</span></Link></li>
+                <li><Link to="/logout"><i className="fas fa-sign-out-alt"></i>{' '}<span className="hide-sm">Logout</span></Link></li>
             </ul>
         )
     }
@@ -27,7 +27,7 @@ const Navbar = props => {
     return <Fragment>
         <nav className='navbar'>
             <h1>
-                <Link to='/'><i className="fas fa-code"></i> DevConnector</Link>
+                <Link to='/'><i className="fas fa-code"></i>{' '}<span className="hide-sm">DevConnector</span></Link>
             </h1>
             {navLinks}
         </nav>

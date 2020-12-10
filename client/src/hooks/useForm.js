@@ -51,21 +51,25 @@ const useForm = props => {
             placeholder = 'A short bio of yourself'
         }
 
-        if (props[key].name === 'jobdescription') {
+        if (props[key].name === 'description') {
             elementType = 'textarea'
             placeholder = 'Job Description'
         }
 
-        if (props[key].name === 'jobtitle') { placeholder = '* Job Title' }
+        if (props[key].name === 'title') { placeholder = '* Job Title' }
 
-        if (props[key].name === 'fromdate' || props[key].name === 'todate') {
+        if (props[key].name === 'from' || props[key].name === 'to') {
             type = 'date'
         }
 
-        if (props[key].name === 'currentjob') {
+        if (props[key].name === 'current') {
             type = 'checkbox'
-            placeholder = 'Current Job'
+            placeholder = props[key].info
         }
+
+        if (props[key].name === 'school') { placeholder = '* School or Bootcamp' }
+        if (props[key].name === 'degree') { placeholder = '* Degree or Certificate' }
+        if (props[key].name === 'fieldOfStudy') { placeholder = 'Field Of Study' }
 
         if (props[key].name === 'twitter') {
             icon = <i className="fab fa-twitter fa-2x"></i>
@@ -132,7 +136,7 @@ const useForm = props => {
         updatedFormData.config.touched = true
 
         //setting values differently for checkboxes- using the checked field
-        if (identifier === 'currentjob') updatedFormData.config.checked = !updatedFormData.config.checked
+        if (identifier === 'current') updatedFormData.config.checked = !updatedFormData.config.checked
 
         copiedForm[index] = updatedFormData
 

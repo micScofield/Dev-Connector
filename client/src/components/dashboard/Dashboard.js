@@ -1,9 +1,11 @@
 import { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import Spinner from '../UIElements/Spinner'
-import { currentProfile } from '../../store/actions'
+import ListExperience from './ListExperience'
+import ListEducation from './ListEducation'
+import { currentProfile, deleteAccount } from '../../store/actions'
 
 const Dashboard = props => {
 
@@ -35,7 +37,10 @@ const Dashboard = props => {
         </Link>
         <Link to='/add-education' className='btn btn-light'>
           <i className='fas fa-graduation-cap text-primary' /> Add Education
-      </Link>
+        </Link>
+        <ListExperience />
+        <ListEducation />
+        <button className='btn btn-large btn-dark' style={{marginTop: '1.5rem'}} onClick={() => props.DELETE_ACCOUNT(props.history)}>Delete Account</button>
       </Fragment>}
     </div>
   )
@@ -56,8 +61,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    LOAD_CURRENT_USER: () => dispatch(currentProfile())
+    LOAD_CURRENT_USER: () => dispatch(currentProfile()),
+    DELETE_ACCOUNT: (history) => dispatch(deleteAccount(history))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dashboard))

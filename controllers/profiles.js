@@ -172,7 +172,8 @@ const addExperience = async (req, res, next) => {
         res.json({ profile: profile })
 
     } catch (error) {
-        return next(new HttpError('Error while adding experience', 500))
+        //return next(new HttpError('Error while adding experience', 500))
+        return res.status(500).json({msg : 'Some server error occurred'})
     }
 
 }
@@ -211,6 +212,7 @@ const addEducation = async (req, res, next) => {
 
     const { school, degree, fieldOfStudy, from, to, current, description } = req.body
 
+    console.log(current, typeof(current))
     const newEdu = {
         school,
         degree,

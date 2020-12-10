@@ -4,21 +4,23 @@ import { connect } from 'react-redux'
 
 import useForm from '../../../hooks/useForm'
 import Input from '../../UIElements/Input'
-//import { AddExperience } from '../../../store/actions'
+import { addExperience } from '../../../store/actions'
 
 const AddExperience = props => {
 
-    //param1 = name, param2 = validation rules, param3= info/subscript, param4 = options | returns form, overall validity, onChangeHandler
+    //accepted parameters = name, validation, info, options, checkbox 
     //for dropdown inputs please provide options also
+    //for checkboxes, pass along a checkbox property with the initial value
 
+    //returns form object, overall validity, onChangeHandler    
     const [formData, isFormValid, onChangeHandler] = useForm([
-        { name: 'jobtitle', validation: { required: true } },
+        { name: 'title', validation: { required: true } },
         { name: 'company', validation: { required: true } },
         { name: 'location' },
-        { name: 'fromdate', info: 'From Date' },
-        { name: 'currentjob', checkbox: false },
-        { name: 'todate', info: 'To Date' },
-        { name: 'jobdescription' }
+        { name: 'from', validation: { required: true }, info: 'From Date' },
+        { name: 'current', checkbox: false, info: 'Current Job' },
+        { name: 'to', info: 'To Date' },
+        { name: 'description' }
     ])
 
     const AddExperienceHandler = () => {
@@ -29,9 +31,10 @@ const AddExperience = props => {
         for (let userInputIdentifier in formData) {
             let name = formData[userInputIdentifier].id
             userFormData[name] = formData[userInputIdentifier].config.value
+            if (name === 'current') userFormData[name] = formData[userInputIdentifier].config.checked
         }
         console.log(userFormData)
-        //props.AddExperience(userFormData, props.history)
+        props.ADD_EXPERIENCE(userFormData, props.history)
     }
 
     //converting object format to an array to loop through and map each one to an input field
@@ -42,9 +45,9 @@ const AddExperience = props => {
 
     //popping the todate field if currentjob is checked...(took 3 hours. Was earlier trying to disable the field but couldnt, instead popping it is elegant and easier)
     for (let key in formData) {
-        if (formData[key].id === 'currentjob') {
+        if (formData[key].id === 'current') {
             if (formData[key].config.checked) {
-                const index = formArray.findIndex(element => element.id === 'todate')
+                const index = formArray.findIndex(element => element.id === 'to')
                 formArray.splice(index, 1)
             }
         }
@@ -94,4 +97,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(withRouter(AddExperience))
+const mapDispatchToProps = dispatch => {
+    return {
+        ADD_EXPERIENCE: (formData, history) => dispatch(addExperience(formData, history))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddExperience))

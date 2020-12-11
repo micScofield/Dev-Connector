@@ -21,14 +21,14 @@ export const PROFILE_ERROR = 'PROFILE_ERROR'
 export const CLEAR_PROFILE = 'CLEAR_PROFILE'
 export const LOAD_ALL_PROFILES_SUCCESS = 'LOAD_ALL_PROFILES_SUCCESS'
 
-//Experience
-export const ADD_EXPERIENCE = 'ADD_EXPERIENCE'
-export const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE'
+// //Experience
+// export const ADD_EXPERIENCE = 'ADD_EXPERIENCE'
+// export const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE'
 
-//Education
-export const ADD_EDUCATION = 'ADD_EDUCATION'
-export const DELETE_EDUCATIONE = 'DELETE_EDUCATION'
+// //Education
+// export const ADD_EDUCATION = 'ADD_EDUCATION'
+// export const DELETE_EDUCATIONE = 'DELETE_EDUCATION'
 
 //delete profile / posts
-export const DELETE_ACCOUNT = 'DELETE_ACCOUNT'
+// export const DELETE_ACCOUNT = 'DELETE_ACCOUNT'
 

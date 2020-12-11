@@ -1,8 +1,9 @@
 import { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import Spinner from './UIElements/Spinner'
-import { getProfiles } from '../store/actions'
+import Spinner from '../UIElements/Spinner'
+import { getProfiles } from '../../store/actions'
+import ProfileItem from './ProfileItem'
 
 const Developers = props => {
 
@@ -15,7 +16,7 @@ const Developers = props => {
             <div className='container'>
                 <h1 className='primary-color large'>Developers</h1>
                 <p className='medium'><i className='fab fa-connectdevelop'></i> Browse and Connect with Developers</p>
-                {console.log(props.profiles)}
+                {props.profiles.map(profile => <div key={profile._id}><ProfileItem profile={profile} /></div>)}
             </div>
         </Fragment>
     )

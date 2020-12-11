@@ -8,13 +8,15 @@ import Lander from './components/layout/Lander'
 import Dashboard from './components/dashboard/Dashboard'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
-import Developers from './components/Developers'
+import Developers from './components/Developers/Developers'
 import Logout from './components/auth/Logout'
 import CreateProfile from './components/dashboard/profiles/CreateProfile'
 import EditProfile from './components/dashboard/profiles/EditProfile'
 import AddExperience from './components/dashboard/profiles/AddExperience'
 import AddEducation from './components/dashboard/profiles/AddEducation'
+import DetailedProfile from './components/Developers/DetailedProfile'
 import { loadUser } from './store/actions'
+
 import './App.css';
 
 const App = props => {
@@ -28,6 +30,7 @@ const App = props => {
       <Route path='/register' exact component={Register} />
       <Route path='/login' exact component={Login} />
       <Route path='/developers' exact component={Developers} />
+      <Route path='/user/:userId' exact component={DetailedProfile} />
       <PrivateRoute path='/logout' exact component={Logout} />
       <PrivateRoute path='/dashboard' exact component={Dashboard} />
       <PrivateRoute path='/create-profile' exact component={CreateProfile} />

@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -21,7 +21,7 @@ body {
 }
 
 .primary-color {
-  color: var(--primary-color)
+  color: var(--primary-color);
 }
 
 img {
@@ -68,7 +68,7 @@ a {
   color: #333;
   outline: none;
   border: none;
-  transition: opacity 0.2s ease-in
+  transition: opacity 0.2s ease-in;
 }
 
 .btn:hover {
@@ -117,6 +117,58 @@ a {
 .table th {
   background: var(--light-color);
 }
+
+/* profile display */
+
+/* Card */
+.card {
+  width: 100%;
+  margin-top: 2rem;
+  background-color: var(--light-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+/* Developers page mini profiles styles */
+.profile {
+  float: left;
+  margin-left: 5rem;
+}
+
+.avatar img{
+  float: left;
+  border-radius: 50%;
+  height: 12rem;
+  width: 12rem;
+}
+
+.profileSkills {
+  float: right;
+  margin-right: 5rem;
+}
+
+/* Detailed-profile styles */
+.profile-detail {
+  margin-top: 10px;
+  background-color: var(--primary-color);
+  height: 500px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+}
+
+.profile-detail img{
+  margin-top: 25px;
+  border-radius: 50%;
+  height: 12rem;
+  width: 12rem;
+}
+
+
 
 /* Mobile Styles */
 @media (max-width: 700px) {

@@ -230,12 +230,16 @@ export const getProfiles = () => async dispatch => {
     }
 }
 
-
-
-
-
-
-
-
-
-
+//get profile by user id
+export const getProfileBUserId = userId => async dispatch => {
+    dispatch(fetchProfileStart())
+    dispatch(clearProfile())
+    dispatch(fetchProfileStart())
+    try {
+        let res = await axios.get(`http://localhost:5000/api/profiles/user/${userId}`)
+        dispatch(loadCurrentProfileSuccess(res.data.profile))
+    } catch (error) {
+        dispatch(profileError())
+        dispatch(setAlert('danger', 'some unknown error occurred !'))
+    }
+}

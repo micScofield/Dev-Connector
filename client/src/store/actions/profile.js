@@ -8,6 +8,7 @@ import { logout } from './index'
 const fetchProfileStart = () => { return { type: actionTypes.FETCH_PROFILE_START } }
 const loadCurrentProfileSuccess = (profile) => { return { type: actionTypes.LOAD_CURRENT_PROFILE_SUCCESS, profile: profile } }
 const loadAllProfilesSuccess = (profiles) => { return { type: actionTypes.LOAD_ALL_PROFILES_SUCCESS, profiles: profiles } }
+const loadRepos = (repos) => { return { type: actionTypes.LOAD_REPOS, repos: repos } }
 const profileError = () => { return { type: actionTypes.PROFILE_ERROR } }
 
 export const currentProfile = () => async dispatch => {
@@ -200,20 +201,17 @@ export const deleteAccount = (history) => async dispatch => {
 
 //get github repositories
 export const getGithubRepos = (username) => async dispatch => {
+    console.log('here')
     dispatch(fetchProfileStart())
 
     try {
         setAuthToken(localStorage.getItem('token'))
         let res = await axios.get(`http://localhost:5000/api/profiles/github/${username}`)
+        console.log(res)
+        dispatch(loadRepos(res.data))
     } catch (error) {
         dispatch(profileError())
-        console.log(error)
-        if (error.response) {
-            error.response.data.errors.forEach(error => {
-                dispatch(setAlert('danger', error.msg))
-            });
-        }
-        console.log('some unknown error occurred !')
+        console.log(error.response)
     }
 }
 

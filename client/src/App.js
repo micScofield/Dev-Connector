@@ -14,7 +14,7 @@ import CreateProfile from './components/dashboard/profiles/CreateProfile'
 import EditProfile from './components/dashboard/profiles/EditProfile'
 import AddExperience from './components/dashboard/profiles/AddExperience'
 import AddEducation from './components/dashboard/profiles/AddEducation'
-import DetailedProfile from './components/Developers/DetailedProfile'
+import DetailedProfile from './components/Developers/DetailedProfile/DetailedProfile'
 import { loadUser } from './store/actions'
 
 import './App.css';

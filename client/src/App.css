@@ -56,6 +56,26 @@ a {
 .medium {
   font-size: 1.5rem;
 }
+.small {
+  font-size: 1.2rem;
+}
+
+/* Margin Classes */
+.my-top-1 {
+  margin-top: 1rem;
+}
+
+.my-bottom-1 {
+  margin-bottom: 1rem;
+}
+
+.my-top {
+  margin-top: 0.5rem;
+}
+
+.my-bottom {
+  margin-bottom: 0.5rem;
+}
 
 /* buttons */
 .btn {
@@ -89,19 +109,31 @@ a {
   margin-top: 0.5rem;
 }
 
+.badge {
+  font-size: 0.8rem;
+  padding: 0.1rem;
+  text-align: center;
+  margin: 0.3rem;
+  background: var(--light-color);
+  color: #333;
+}
+
 .btn-primary,
+.badge-primary,
 .alert-primary {
   background: var(--primary-color);
   color: #fff;
 }
 
 .btn-light,
+.badge-light,
 .alert-light {
   background: var(--light-color);
   color: #333;
 }
 
 .alert-dark,
+.badge-dark,
 .btn-dark {
   background: var(--danger-color);
   color: #fff;
@@ -118,10 +150,26 @@ a {
   background: var(--light-color);
 }
 
-/* profile display */
+/* profiles display */
+
+.profiles {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  gap: 2rem;
+  padding: 1rem;
+  align-items: center;
+  background-color: var(--light-color);
+  margin-bottom: 2rem;
+}
+
+.profiles img {
+  border-radius: 50%;
+}
+
+/* Developers page mini profiles styles without CSS grid, using float and margins*/
 
 /* Card */
-.card {
+/* .card {
   width: 100%;
   margin-top: 2rem;
   background-color: var(--light-color);
@@ -129,15 +177,14 @@ a {
   border-radius: 6px;
   padding: 1rem;
   overflow: hidden;
-}
+} */
 
-/* Developers page mini profiles styles */
-.profile {
+/* .profile {
   float: left;
   margin-left: 5rem;
 }
 
-.avatar img{
+.avatar img {
   float: left;
   border-radius: 50%;
   height: 12rem;
@@ -147,13 +194,28 @@ a {
 .profileSkills {
   float: right;
   margin-right: 5rem;
+} */
+
+/* -------------------------------------------------- */
+
+/* Detailed-profile styles using CSS grid */
+
+/* Grid Styles */
+.profile-grid {
+  display: grid;
+  grid-template-areas:
+    "top top"
+    "about about"
+    "exp edu"
+    "github github";
+  grid-gap: 2rem;
 }
 
-/* Detailed-profile styles */
-.profile-detail {
+/* Top Section */
+.profile-top {
+  grid-area: top;
   margin-top: 10px;
   background-color: var(--primary-color);
-  height: 500px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -161,14 +223,89 @@ a {
   color: white;
 }
 
-.profile-detail img{
+.profile-top img {
   margin-top: 25px;
-  border-radius: 50%;
   height: 12rem;
   width: 12rem;
+  border-radius: 50%;
 }
 
+.profile-top-icons {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 
+.profile-top-icons a {
+  color: inherit;
+  margin: 0.5rem;
+}
+
+.profile-top-icons a:hover {
+  color: var(--dark-color);
+}
+
+/* About Section */
+.profile-about {
+  grid-area: about;
+  background-color: var(--light-color);
+  text-align: center;
+  padding: 2rem;
+}
+
+.profile-about h2 {
+  color: var(--primary-color);
+}
+
+.line {
+  height: 1px;
+  background: #ccc;
+  margin: 1.5rem 0;
+}
+
+/* Experience and Education Section */
+
+.profile-exp {
+  grid-area: exp;
+  padding: 2rem;
+  background-color: var(--light-color);
+}
+
+.profile-edu {
+  grid-area: edu;
+  padding: 2rem;
+  background-color: var(--light-color);
+}
+
+.profile-exp > div,
+.profile-github > div,
+.profile-edu > div {
+  border-bottom: 1px dotted #ccc;
+  margin-bottom: 1rem;
+}
+
+.profile-exp > div:last-child,
+.profile-github > div:last-child,
+.profile-edu > div:last-child {
+  border: none;
+}
+
+.profile-github {
+  grid-area: github;
+  padding: 2rem;
+  background-color: var(--light-color);
+}
+
+.profile-github .repo {
+  display: flex;
+}
+
+.profile-github .repo > div {
+  flex: 7;
+}
+
+.profile-github .repo > div:last-child {
+  flex: 3;
+}
 
 /* Mobile Styles */
 @media (max-width: 700px) {

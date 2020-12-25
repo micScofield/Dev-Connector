@@ -14,8 +14,8 @@ const Developers = props => {
     let content = (
         <Fragment>
             <div className='container'>
-                <h1 className='primary-color large'>Developers</h1>
-                <p className='medium'><i className='fab fa-connectdevelop'></i> Browse and Connect with Developers</p>
+                <h1 className='primary-color'>Developers</h1>
+                <p className='medium' style={{marginBottom: '10px'}}><i className='fab fa-connectdevelop'></i> Browse and Connect with Developers</p>
                 {props.profiles.map(profile => <div key={profile._id}><ProfileItem profile={profile} /></div>)}
             </div>
         </Fragment>

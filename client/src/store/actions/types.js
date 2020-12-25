@@ -21,6 +21,9 @@ export const PROFILE_ERROR = 'PROFILE_ERROR'
 export const CLEAR_PROFILE = 'CLEAR_PROFILE'
 export const LOAD_ALL_PROFILES_SUCCESS = 'LOAD_ALL_PROFILES_SUCCESS'
 
+//Repositories
+export const LOAD_REPOS = 'LOAD_REPOS'
+
 // //Experience
 // export const ADD_EXPERIENCE = 'ADD_EXPERIENCE'
 // export const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE'

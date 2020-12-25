@@ -17,7 +17,7 @@ const Navbar = props => {
     if (props.isAuth) {
         navLinks = (
             <ul>
-                <li><Link to="/developers">Developers</Link></li>
+                <li><Link to="/developers"><i className="fab fa-dev"></i>{' '}<span className="hide-sm">Developers</span></Link></li>
                 <li><Link to="/dashboard"><i className="fas fa-user"></i>{' '}<span className="hide-sm">Dashboard</span></Link></li>
                 <li><Link to="/logout"><i className="fas fa-sign-out-alt"></i>{' '}<span className="hide-sm">Logout</span></Link></li>
             </ul>

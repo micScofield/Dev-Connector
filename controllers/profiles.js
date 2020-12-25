@@ -40,7 +40,7 @@ const setProfile = async (req, res, next) => {
         location,
         bio,
         status,
-        githubUsername,
+        githubusername,
         skills,
         youtube,
         facebook,
@@ -57,7 +57,7 @@ const setProfile = async (req, res, next) => {
     if (location) profileFields.location = location
     if (bio) profileFields.bio = bio
     if (status) profileFields.status = status
-    if (githubUsername) profileFields.githubUsername = githubUsername
+    if (githubusername) profileFields.githubUsername = githubusername
 
     console.log(typeof (company))
     console.log(typeof (skills))
@@ -282,7 +282,7 @@ const getGithubRepo = async (req, res, next) => {
         })
 
     } catch (error) {
-        return next(new HttpError('Couldnt fetch user repositories', 500))
+        return res.status(404).json({msg: 'Couldnt fetch user repositories'})
     }
 }
 

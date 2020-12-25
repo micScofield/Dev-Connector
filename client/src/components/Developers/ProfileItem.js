@@ -2,20 +2,17 @@ import { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 
 const ProfileItem = ({ profile, history }) => {
-    // console.log(profile)
-    const src1 = 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
+    const dummyGravatar = 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200'
     return <Fragment>
-        <div className='card'>
-            <div className='avatar'>
-                <img src={src1} alt='Cant load image' />
-            </div>
-            <div className='profile'>
-                <h3>{profile.user.name}</h3>
-                <p>{profile.bio}</p>
+        <div className='profiles'>
+            <img src={profile.user.avatar ? profile.user.avatar : dummyGravatar} alt='Poor Internet, Cant load image' />
+            <div>
+                <h2>{profile.user.name}</h2>
+                <p>{profile.status} {profile.company && <span>at {profile.company}</span>}</p>
                 <p>{profile.location}</p>
                 <button onClick={() => history.push(`/user/${profile.user._id}`)} className='btn btn-primary btn-large' style={{ marginTop: '0.5rem' }}>View Profile</button>
             </div>
-            <div className='profileSkills'>
+            <div>
                 <ul>
                     {profile.skills.map(skill => (
                         <li key={skill}>

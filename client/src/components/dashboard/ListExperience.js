@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import { deleteExperience } from '../../store/actions'
+import formatDate from '../../utility/formatDate'
 
 const ListExperience = props => {
 
@@ -15,7 +16,7 @@ const ListExperience = props => {
             <td>{exp.company}</td>
             <td className="hide-sm">{exp.title}</td>
             <td>
-                {exp.from} - {exp.to ? exp.to : 'Present'}
+                {formatDate(exp.from)} - {exp.to ? formatDate(exp.to) : 'Present'}
             </td>
             <td>
                 <button className="btn btn-dark" onClick={deleteExperienceHandler.bind(this, exp._id)} >Delete</button>

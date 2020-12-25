@@ -201,7 +201,6 @@ export const deleteAccount = (history) => async dispatch => {
 
 //get github repositories
 export const getGithubRepos = (username) => async dispatch => {
-    console.log('here')
     dispatch(fetchProfileStart())
 
     try {

@@ -139,6 +139,10 @@ a {
   color: #fff;
 }
 
+.badge-white {
+  background-color: white;
+}
+
 /* tables */
 .table th,
 .table td {

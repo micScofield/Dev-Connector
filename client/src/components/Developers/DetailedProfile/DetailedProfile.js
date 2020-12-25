@@ -20,12 +20,21 @@ const DetailedProfile = props => {
 
     !props.loading && console.log(props.profile)
 
+    // showing edit functionality to the user if the profile is of the logged in user itself
+    let editProfileButton = null
+    if (!props.loading && props.profile && props.auth.isAuth) {
+        if (props.auth.user._id === props.profile.user._id) {
+            editProfileButton = <button className='btn btn-light btn-large' onClick={() => props.history.push('/edit-profile')}>Edit Profile</button>
+        }
+    }
+
     //rendering either profile or spinner
     let profile = <Spinner />
     if (props.profile) profile = (
         <Fragment>
             <div className='container'>
                 <button className='btn btn-light btn-large' onClick={() => props.history.goBack()}>Back To Profiles</button>
+                {editProfileButton}
 
                 <div className='profile-grid'>
                     <div className='profile-top'>
@@ -55,7 +64,8 @@ const mapStateToProps = state => {
     return {
         loading: state.profile.loading,
         profile: state.profile.profile,
-        repos: state.profile.repos
+        repos: state.profile.repos,
+        auth: state.auth
     }
 }
 

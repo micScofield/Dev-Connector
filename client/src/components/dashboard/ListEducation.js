@@ -1,8 +1,8 @@
 import { Fragment } from 'react'
-
 import { connect } from 'react-redux'
 
 import { deleteEducation } from '../../store/actions'
+import formatDate from '../../utility/formatDate'
 
 const ListEducation = props => {
 
@@ -16,7 +16,7 @@ const ListEducation = props => {
             <td>{edu.school}</td>
             <td className="hide-sm">{edu.degree}</td>
             <td>
-                {edu.from} - {edu.to ? edu.to : 'Present'}
+                {formatDate(edu.from)} - {edu.to ? formatDate(edu.to) : 'Present'}
             </td>
             <td>
                 <button className="btn btn-dark" onClick={deleteEducationHandler.bind(this, edu._id)}>Delete</button>

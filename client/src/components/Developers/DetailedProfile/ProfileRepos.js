@@ -30,7 +30,7 @@ const ProfileRepos = ({ username, repos, getGithubRepos, loading }) => {
                             <li className="badge badge-dark">
                                 Watchers: {repo.watchers_count}
                             </li>
-                            <li className="badge badge-light">
+                            <li className="badge badge-white">
                                 Forks: {repo.forks_count}
                             </li>
                         </ul>

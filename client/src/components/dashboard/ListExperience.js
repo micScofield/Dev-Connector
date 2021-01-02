@@ -8,7 +8,7 @@ const ListExperience = props => {
 
     const deleteExperienceHandler = (expId) => {
         console.log(expId)
-        props.deleteExperience()
+        props.deleteExperience(expId)
     }
 
     const experiences = props.profile.experience.map(exp => (

@@ -8,7 +8,7 @@ const ListEducation = props => {
 
     const deleteEducationHandler = (eduId) => {
         console.log(eduId)
-        props.deleteEducation()
+        props.deleteEducation(eduId)
     }
 
     const educations = props.profile.education.map(edu => (

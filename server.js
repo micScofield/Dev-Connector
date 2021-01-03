@@ -3,10 +3,6 @@ const express = require('express')
 //db connection
 const connectDB = require('./config/db')
 
-//models
-const HttpError = require('./models/http-error')
-
-
 const app = express()
 
 app.use(express.json()) //for bodyparsing 
@@ -18,7 +14,6 @@ app.use((req, res, next) => {
         'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-token'
     );
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-
     next();
 });
 
@@ -28,7 +23,7 @@ app.use('/api/profiles', require('./routes/api/profiles'))
 app.use('/api/posts', require('./routes/api/posts'))
 
 app.use((req, res, next) => {
-    return new HttpError('Couldnt find any route you provided !', 404)
+    return res.json({ msg: 'Couldnt find any route you provided !' })
 })
 
 app.use((error, req, res, next) => {

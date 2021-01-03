@@ -24,14 +24,10 @@ export const LOAD_ALL_PROFILES_SUCCESS = 'LOAD_ALL_PROFILES_SUCCESS'
 //Repositories
 export const LOAD_REPOS = 'LOAD_REPOS'
 
-// //Experience
-// export const ADD_EXPERIENCE = 'ADD_EXPERIENCE'
-// export const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE'
-
-// //Education
-// export const ADD_EDUCATION = 'ADD_EDUCATION'
-// export const DELETE_EDUCATIONE = 'DELETE_EDUCATION'
-
 //delete profile / posts
 // export const DELETE_ACCOUNT = 'DELETE_ACCOUNT'
 
+//Posts
+export const LOAD_POSTS_START = 'LOAD_POSTS_START'
+export const LOAD_POSTS = 'LOAD_POSTS'
+export const POSTS_ERROR = 'POSTS_ERROR'

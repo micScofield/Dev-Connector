@@ -8,13 +8,15 @@ import thunk from 'redux-thunk'
 import AlertReducer from './store/reducers/alert'
 import AuthReducer from './store/reducers/auth'
 import ProfileReducer from './store/reducers/profile'
+import PostReducer from './store/reducers/post'
 
 import App from './App';
 
 const rootReducer = combineReducers({
   alert: AlertReducer,
   auth: AuthReducer,
-  profile: ProfileReducer
+  profile: ProfileReducer,
+  post: PostReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

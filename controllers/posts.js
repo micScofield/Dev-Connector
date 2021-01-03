@@ -27,9 +27,9 @@ const addPost = async (req, res, next) => {
         avatar: user.avatar
     })
 
-    newPost.save()
+    await newPost.save()
 
-    res.status(201).json({ message: 'Post added !' })
+    res.status(201).json({ msg: 'Post added successfully !' })
 }
 
 const getPosts = async (req, res, next) => {
@@ -37,10 +37,10 @@ const getPosts = async (req, res, next) => {
     try {
         posts = await Post.find().sort({ date: -1 })
     } catch (error) {
-        return next(new HttpError('Error while looking up in the db', 500))
+        return res.status(500).json({msg: 'Error while looking up in the db'})
     }
 
-    if (!posts) return next(new HttpError('No posts found', 404))
+    if (!posts) return res.status(404).json({msg: 'No posts found'})
 
     res.json(posts)
 }

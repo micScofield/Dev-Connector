@@ -30,4 +30,7 @@ export const LOAD_REPOS = 'LOAD_REPOS'
 //Posts
 export const LOAD_POSTS_START = 'LOAD_POSTS_START'
 export const LOAD_POSTS = 'LOAD_POSTS'
+export const LOAD_POST = 'LOAD_POST'
 export const POSTS_ERROR = 'POSTS_ERROR'
+export const UPDATE_LIKES = 'UPDATE_LIKES'
+export const UPDATE_COMMENTS = 'UPDATE_COMMENTS'

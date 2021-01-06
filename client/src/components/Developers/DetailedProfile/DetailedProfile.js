@@ -33,7 +33,7 @@ const DetailedProfile = props => {
     if (props.profile) profile = (
         <Fragment>
             <div className='container'>
-                <button className='btn btn-light btn-large' onClick={() => props.history.goBack()}>Back To Profiles</button>
+                <button className='btn btn-light btn-large' onClick={() => props.history.goBack()}>Go Back</button>
                 {editProfileButton}
 
                 <div className='profile-grid'>

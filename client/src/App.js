@@ -10,6 +10,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Developers from './components/Developers/Developers'
 import Posts from './components/posts/Posts'
+import PostDiscussion from './components/posts/PostDiscussion'
 import Logout from './components/auth/Logout'
 import CreateProfile from './components/dashboard/profiles/CreateProfile'
 import EditProfile from './components/dashboard/profiles/EditProfile'
@@ -31,9 +32,10 @@ const App = props => {
       <Route path='/register' exact component={Register} />
       <Route path='/login' exact component={Login} />
       <Route path='/developers' exact component={Developers} />
-      <Route path='/posts' exact component={Posts} />
       <Route path='/user/:userId' exact component={DetailedProfile} />
       <PrivateRoute path='/logout' exact component={Logout} />
+      <PrivateRoute path='/posts' exact component={Posts} />
+      <PrivateRoute path='/posts/:id' exact component={PostDiscussion} />
       <PrivateRoute path='/dashboard' exact component={Dashboard} />
       <PrivateRoute path='/create-profile' exact component={CreateProfile} />
       <PrivateRoute path='/edit-profile' exact component={EditProfile} />

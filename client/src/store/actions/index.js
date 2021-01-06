@@ -13,3 +13,4 @@ export {
     getProfiles,
     getProfileBUserId 
 } from './profile'
+export { addLike, addPost, loadPosts, removeLike, deletePost, loadPost, addComment, deleteComment } from './post'

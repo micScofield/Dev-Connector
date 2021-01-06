@@ -27,9 +27,9 @@ const addPost = async (req, res, next) => {
         avatar: user.avatar
     })
 
-    await newPost.save()
+    const post = await newPost.save()
 
-    res.status(201).json({ msg: 'Post added successfully !' })
+    res.status(201).json(post)
 }
 
 const getPosts = async (req, res, next) => {
@@ -112,7 +112,7 @@ const likePost = async (req, res, next) => {
         return next(new HttpError('Some error occurred, try again !', 500))
     }
 
-    res.json({ likes: post.likes })
+    res.json(post.likes)
 }
 
 const unlikePost = async (req, res, next) => {
@@ -148,7 +148,7 @@ const unlikePost = async (req, res, next) => {
         return next(new HttpError('Some error occurred, try again !', 500))
     }
 
-    res.json({ likes: post.likes })
+    res.json(post.likes)
 }
 
 const makeCommentOnPost = async (req, res, next) => {
@@ -191,7 +191,7 @@ const makeCommentOnPost = async (req, res, next) => {
         return next(new HttpError('Some error occurred, try again !', 500))
     }
 
-    res.json({ comments: post.comments })
+    res.json(post.comments)
 }
 
 const deleteCommentFromPostById = async (req, res, next) => {
@@ -231,7 +231,7 @@ const deleteCommentFromPostById = async (req, res, next) => {
         return next(new HttpError('Some error occurred, try again !', 500))
     }
 
-    res.json({ comments: post.comments })
+    res.json(post.comments)
 }
 
 exports.AddPost = addPost

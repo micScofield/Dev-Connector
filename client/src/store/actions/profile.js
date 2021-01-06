@@ -40,7 +40,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        console.log('sending data', formData)
+        //console.log('sending data', formData)
         let res = await axios.post('http://localhost:5000/api/profiles', JSON.stringify(formData), config)
 
         if (res.status === 200) dispatch(setAlert('success', edit ? 'Profile updated successfully !' : 'Profile created successfully !'))

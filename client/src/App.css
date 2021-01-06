@@ -322,6 +322,40 @@ a {
   }
 }
 
+/* Single Post */
+
+.post {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 2rem;
+  align-items: center;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: #ccc solid 1px;
+}
+
+.post > div:first-child {
+  text-align: center;
+}
+
+.post img {
+  border-radius: 50%;
+  width: 100px;
+}
+
+.post .comment-count {
+  background: var(--light-color);
+  color: var(--primary-color);
+  padding: 0.1rem 0.2rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.post .post-date {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
 /* navbar */
 /* .navbar {
   display: flex;

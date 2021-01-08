@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 import Post from './Post'
-import DisussionForm from './DiscussionForm'
+import DiscussionForm from './DiscussionForm'
 import Spinner from '../UIElements/Spinner'
 import { loadPost, deleteComment } from '../../store/actions'
 import formatDate from '../../utility/formatDate'
@@ -22,7 +22,6 @@ const PostDiscussion = ({ loadPost, posts: { post, loading, error }, userId, mat
                 <div>
                     <Link to={`/user/${comment.user}`}>
                         <img
-                            className="round-img"
                             src={comment.avatar}
                             alt="Cant load image"
                         />
@@ -49,7 +48,7 @@ const PostDiscussion = ({ loadPost, posts: { post, loading, error }, userId, mat
             <button className='btn btn-large' onClick={() => history.goBack()}>Back to Posts</button>
             <Post post={post} userId={userId} showActions={false} lightBg={true} />
 
-            <DisussionForm postId={post._id} />
+            <DiscussionForm postId={post._id} />
 
             {!loading && alertMsg && <p className='alert alert-primary'>{alertMsg}</p>}
 

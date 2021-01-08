@@ -24,6 +24,10 @@ body {
   color: var(--primary-color);
 }
 
+.bg-light {
+  background-color: var(--light-color);
+}
+
 img {
   width: 100%;
 }

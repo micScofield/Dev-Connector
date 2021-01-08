@@ -1,13 +1,14 @@
 import { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import Post from './Post'
 import DisussionForm from './DiscussionForm'
 import Spinner from '../UIElements/Spinner'
-import { loadPost } from '../../store/actions'
+import { loadPost, deleteComment } from '../../store/actions'
+import formatDate from '../../utility/formatDate'
 
-const PostDiscussion = ({ loadPost, posts: { post, loading, error }, userId, match, history }) => {
+const PostDiscussion = ({ loadPost, posts: { post, loading, error }, userId, match, history, deleteComment, alertMsg }) => {
 
     useEffect(() => {
         loadPost(match.params.id)
@@ -15,51 +16,52 @@ const PostDiscussion = ({ loadPost, posts: { post, loading, error }, userId, mat
 
     !loading && post && console.log(post.comments)
 
-    const displayComments = (
-        <Fragment>
-            <div class="comments">
-                <div class="post bg-white p-1 my-1">
-                    <div>
-                        <a href="profile.html">
-                            <img
-                                class="round-img"
-                                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                                alt=""
-                            />
-                            <h4>John Doe</h4>
-                        </a>
-                    </div>
-                    <div>
-                        <p class="my-1">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-                            possimus corporis sunt necessitatibus! Minus nesciunt soluta
-                            suscipit nobis. Amet accusamus distinctio cupiditate blanditiis
-                            dolor? Illo perferendis eveniet cum cupiditate aliquam?
-                        </p>
-                        <p class="post-date">
-                            Posted on 04/16/2019
-                        </p>
-                    </div>
+    const comments = !loading && post && post.comments.map(comment => (
+        <div className="comments" key={comment._id}>
+            <div className="post my-top-1">
+                <div>
+                    <Link to={`/user/${comment.user}`}>
+                        <img
+                            className="round-img"
+                            src={comment.avatar}
+                            alt="Cant load image"
+                        />
+                        <h4 className='primary-color'>{comment.name}</h4>
+                    </Link>
+                </div>
+                <div>
+                    <p className="my-top-1">
+                        {comment.text}
+                    </p>
+                    <p className="post-date">
+                        Posted on {formatDate(comment.date)}
+                    </p>
+                    {comment.user === userId && <button type="button" className="btn btn-large btn-dark" onClick={e => deleteComment(post._id, comment._id)}>
+                        <i className="fas fa-times"></i>
+                    </button>}
                 </div>
             </div>
-        </Fragment>
-    )
+        </div>
+    ))
 
     return loading ? <Spinner /> : (!post ? <h2 className='container'>{error}</h2> : <Fragment>
         <div className='container'>
             <button className='btn btn-large' onClick={() => history.goBack()}>Back to Posts</button>
-            <Post post={post} userId={userId} showActions={false} />
+            <Post post={post} userId={userId} showActions={false} lightBg={true} />
 
             <DisussionForm postId={post._id} />
 
-            {displayComments}
+            {!loading && alertMsg && <p className='alert alert-primary'>{alertMsg}</p>}
+
+            {comments}
         </div>
     </Fragment>)
 }
 
 const mapStateToProps = state => ({
+    alertMsg: state.alert.msg,
     posts: state.post,
     userId: state.auth.user._id
 })
 
-export default connect(mapStateToProps, { loadPost })(withRouter(PostDiscussion))
+export default connect(mapStateToProps, { loadPost, deleteComment })(withRouter(PostDiscussion))

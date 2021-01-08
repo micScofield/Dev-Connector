@@ -21,8 +21,8 @@ const DiscussionForm = ({ postId, addComment }) => {
         <div>
             <div className='alert alert-primary'><h4>Leave A Comment</h4></div>
             <form className="my-top-1">
-                <textarea style={{ width: '100%', fontSize: '1.3rem', padding: '0.5rem' }} rows='5' value={text} placeholder='Write something...' onChange={changeHandler.bind(this)} />
-                <button className='btn btn-large btn-primary' onClick={submitPostHandler.bind(this)}>Submit</button>
+                <textarea style={{ width: '100%', fontSize: '1.3rem', padding: '0.5rem' }} rows='3' value={text} placeholder='Write something...' onChange={changeHandler.bind(this)} />
+                <button className='btn btn-large btn-dark' onClick={submitPostHandler.bind(this)}>Submit</button>
             </form>
         </div>
     </Fragment>

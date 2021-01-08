@@ -5,9 +5,13 @@ import { connect } from 'react-redux'
 import formatDate from '../../utility/formatDate'
 import { addLike, deletePost, removeLike } from '../../store/actions'
 
-const Post = ({ post, userId, addLike, deletePost, removeLike, showActions }) => {
+const Post = ({ post, userId, addLike, deletePost, removeLike, showActions, lightBg }) => {
+
+    const postClasses = ['post']
+    if(lightBg) postClasses.push('bg-light')
+
     return <Fragment>
-        <div className="post">
+        <div className={postClasses.join(' ')}>
             <div>
                 <Link to={`/user/${post.user}`}>
                     <img src={post.avatar} alt='cant load image' />

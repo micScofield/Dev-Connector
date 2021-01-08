@@ -9,7 +9,7 @@ const postsError = error => ({ type: actionTypes.POSTS_ERROR, error: error })
 const storePosts = posts => ({ type: actionTypes.LOAD_POSTS, posts: posts })
 const storePost = post => ({ type: actionTypes.LOAD_POST, post: post })
 const updateLikes = (id, likes) => ({ type: actionTypes.UPDATE_LIKES, id: id, likes: likes })
-const updateComments = (id, comments) => ({ type: actionTypes.UPDATE_LIKES, id: id, comments: comments })
+const updateComments = (id, comments) => ({ type: actionTypes.UPDATE_COMMENTS, id: id, comments: comments })
 
 export const loadPosts = () => async dispatch => {
     dispatch(postsStart())
@@ -118,12 +118,13 @@ export const addComment = (id, text) => async dispatch => {
 }
 
 //Remove comment
-export const deleteComment = (postId, commentId) => async dispatch => {
+export const deleteComment = (id, commentId) => async dispatch => {
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.delete(`http://localhost:5000/api/posts/${postId}/deleteComment/${commentId}`)
+        const res = await axios.delete(`http://localhost:5000/api/posts/${id}/deleteComment/${commentId}`)
         console.log(res.data)
-        // dispatch(updateComments(id, res.data))
+        dispatch(updateComments(id, res.data))
+        dispatch(setAlert('success', 'Comment removed !'))
     } catch (error) {
         console.log(error, error.response)
         dispatch(postsError(error.response.data.msg))

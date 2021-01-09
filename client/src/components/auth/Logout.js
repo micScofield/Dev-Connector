@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import { logout } from '../../store/actions'
 
-const signout = ({ logout }) => {
+const Signout = ({ logout }) => {
     useEffect(() => {
         logout()
     }, [])
@@ -11,4 +11,4 @@ const signout = ({ logout }) => {
     return <Redirect to='/' />
 }
 
-export default connect(null, {logout})(signout)
+export default connect(null, {logout})(Signout)

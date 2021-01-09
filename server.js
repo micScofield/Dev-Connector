@@ -23,17 +23,17 @@ app.use('/api/auth', require('./routes/api/auth'))
 app.use('/api/profiles', require('./routes/api/profiles'))
 app.use('/api/posts', require('./routes/api/posts'))
 
-app.use((req, res, next) => {
-    return res.json({ msg: 'Couldnt find any route you provided !' })
-})
+// app.use((req, res, next) => {
+//     return res.json({ msg: 'Couldnt find any route you provided !' })
+// })
 
-app.use((error, req, res, next) => {
-    if (res.headerSent) {
-        return next(error);
-    }
-    res.status(error.code || 500)
-    res.json({ message: error.message || 'An unknown error occurred!' });
-})
+// app.use((error, req, res, next) => {
+//     if (res.headerSent) {
+//         return next(error);
+//     }
+//     res.status(error.code || 500)
+//     res.json({ message: error.message || 'An unknown error occurred!' });
+// })
 
 connectDB()
 const PORT = process.env.PORT || 5000

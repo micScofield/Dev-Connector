@@ -27,7 +27,7 @@ export const auth = (name, email, password) => async dispatch => {
 
     try {
         let res = await axios.post(
-            'http://localhost:5000/api/users/',
+            '/api/users/',
             JSON.stringify({ name, email, password }),
             {
                 headers: {
@@ -48,7 +48,7 @@ export const login = (email, password) => async dispatch => {
 
     try {
         let res = await axios.post(
-            'http://localhost:5000/api/auth/',
+            '/api/auth/',
             JSON.stringify({ email, password }),
             {
                 headers: {
@@ -69,7 +69,7 @@ export const login = (email, password) => async dispatch => {
 export const loadUser = () => async dispatch => {
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.get('http://localhost:5000/api/auth/')
+        let res = await axios.get('/api/auth/')
         dispatch(loadUserSuccess(res.data.user))
     } catch (error) {
         dispatch(authInvalidToken())

@@ -16,7 +16,7 @@ export const currentProfile = () => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.get('/api/profiles/me')
+        let res = await axios.get('http://localhost:5000/api/profiles/me')
         console.log('profile exists')
         dispatch(loadCurrentProfileSuccess(res.data.profile))
     } catch (error) {
@@ -41,7 +41,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     try {
         setAuthToken(localStorage.getItem('token'))
         //console.log('sending data', formData)
-        let res = await axios.post('/api/profiles', JSON.stringify(formData), config)
+        let res = await axios.post('http://localhost:5000/api/profiles', JSON.stringify(formData), config)
 
         if (res.status === 200) dispatch(setAlert('success', edit ? 'Profile updated successfully !' : 'Profile created successfully !'))
 
@@ -76,7 +76,7 @@ export const addExperience = (formData, history) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.put('/api/profiles/experience', JSON.stringify(formData), config)
+        let res = await axios.put('http://localhost:5000/api/profiles/experience', JSON.stringify(formData), config)
 
         if (res.status === 200) dispatch(setAlert('success', 'Experience added successfully !'))
 
@@ -108,7 +108,7 @@ export const addEducation = (formData, history) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.put('/api/profiles/education', JSON.stringify(formData), config)
+        let res = await axios.put('http://localhost:5000/api/profiles/education', JSON.stringify(formData), config)
 
         if (res.status === 200) dispatch(setAlert('success', 'Education added successfully !'))
 
@@ -135,7 +135,7 @@ export const deleteExperience = (expId) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.delete(`/api/profiles/experience/${expId}`)
+        let res = await axios.delete(`http://localhost:5000/api/profiles/experience/${expId}`)
 
         if (res.status === 200) dispatch(setAlert('success', 'Experience deleted successfully !'))
 
@@ -158,7 +158,7 @@ export const deleteEducation = (eduId) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.delete(`/api/profiles/education/${eduId}`)
+        let res = await axios.delete(`http://localhost:5000/api/profiles/education/${eduId}`)
 
         if (res.status === 200) dispatch(setAlert('success', 'Education deleted successfully !'))
 
@@ -181,7 +181,7 @@ export const deleteAccount = (history) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.delete('/api/profiles')
+        let res = await axios.delete('http://localhost:5000/api/profiles')
 
         dispatch(logout())
         if (res.status === 200) dispatch(setAlert('success', 'Account deleted successfully'))
@@ -205,7 +205,7 @@ export const getGithubRepos = (username) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        let res = await axios.get(`/api/profiles/github/${username}`)
+        let res = await axios.get(`http://localhost:5000/api/profiles/github/${username}`)
         console.log(res)
         dispatch(loadRepos(res.data))
     } catch (error) {
@@ -219,7 +219,7 @@ export const getProfiles = () => async dispatch => {
     dispatch(fetchProfileStart())
 
     try {
-        let res = await axios.get('/api/profiles')
+        let res = await axios.get('http://localhost:5000/api/profiles')
         dispatch(loadAllProfilesSuccess(res.data.profiles))
     } catch (error) {
         dispatch(profileError())
@@ -233,7 +233,7 @@ export const getProfileBUserId = userId => async dispatch => {
     dispatch(clearProfile())
     dispatch(fetchProfileStart())
     try {
-        let res = await axios.get(`/api/profiles/user/${userId}`)
+        let res = await axios.get(`http://localhost:5000/api/profiles/user/${userId}`)
         dispatch(loadCurrentProfileSuccess(res.data.profile))
     } catch (error) {
         dispatch(profileError())

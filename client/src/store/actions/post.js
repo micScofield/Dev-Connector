@@ -16,7 +16,7 @@ export const loadPosts = () => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.get('/api/posts')
+        const res = await axios.get('http://localhost:5000/api/posts')
         console.log(res.data)
         dispatch(storePosts(res.data))
     } catch (error) {
@@ -35,7 +35,7 @@ export const addPost = (text) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        await axios.post('/api/posts', text, config)
+        await axios.post('http://localhost:5000/api/posts', text, config)
         dispatch(loadPosts())
     } catch (error) {
         console.log(error, error.response)
@@ -47,7 +47,7 @@ export const addPost = (text) => async dispatch => {
 export const addLike = (id) => async dispatch => {
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.put(`/api/posts/like/${id}`)
+        const res = await axios.put(`http://localhost:5000/api/posts/like/${id}`)
         console.log(res.data)
         dispatch(updateLikes(id, res.data))
     } catch (error) {
@@ -60,7 +60,7 @@ export const addLike = (id) => async dispatch => {
 export const removeLike = (id) => async dispatch => {
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.put(`/api/posts/unlike/${id}`)
+        const res = await axios.put(`http://localhost:5000/api/posts/unlike/${id}`)
         console.log(res.data)
         dispatch(updateLikes(id, res.data))
     } catch (error) {
@@ -73,7 +73,7 @@ export const removeLike = (id) => async dispatch => {
 export const deletePost = (id) => async dispatch => {
     try {
         setAuthToken(localStorage.getItem('token'))
-        await axios.delete(`/api/posts/${id}`)
+        await axios.delete(`http://localhost:5000/api/posts/${id}`)
         dispatch(loadPosts())
         dispatch(setAlert('success', 'Post removed !'))
     } catch (error) {
@@ -88,7 +88,7 @@ export const loadPost = id => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.get(`/api/posts/${id}`)
+        const res = await axios.get(`http://localhost:5000/api/posts/${id}`)
         console.log(res.data)
         dispatch(storePost(res.data))
     } catch (error) {
@@ -108,7 +108,7 @@ export const addComment = (id, text) => async dispatch => {
 
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.put(`/api/posts/${id}/comment`, text, config)
+        const res = await axios.put(`http://localhost:5000/api/posts/${id}/comment`, text, config)
         console.log(res.data)
         dispatch(updateComments(id, res.data))
     } catch (error) {
@@ -121,7 +121,7 @@ export const addComment = (id, text) => async dispatch => {
 export const deleteComment = (id, commentId) => async dispatch => {
     try {
         setAuthToken(localStorage.getItem('token'))
-        const res = await axios.delete(`/api/posts/${id}/deleteComment/${commentId}`)
+        const res = await axios.delete(`http://localhost:5000/api/posts/${id}/deleteComment/${commentId}`)
         console.log(res.data)
         dispatch(updateComments(id, res.data))
         dispatch(setAlert('success', 'Comment removed !'))
